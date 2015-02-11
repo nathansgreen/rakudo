@@ -121,6 +121,7 @@ P_METAMODEL_SOURCES = \
   src/Perl6/Metamodel/NativeHOW.nqp \
   src/Perl6/Metamodel/SubsetHOW.nqp \
   src/Perl6/Metamodel/EnumHOW.nqp \
+  src/Perl6/Metamodel/CoercionHOW.nqp \
   src/Perl6/Metamodel/ContainerDescriptor.nqp \
   src/Perl6/Metamodel/Dispatchers.nqp \
 
@@ -209,6 +210,7 @@ P_CORE_SOURCES = \
   src/core/IO/Local.pm \
   src/core/IO/Dir.pm \
   src/core/IO/File.pm \
+  src/core/IO/Symlink.pm \
   src/core/IOU.pm \
   src/core/IO/Spec.pm \
   src/core/IO/Spec/Unix.pm \

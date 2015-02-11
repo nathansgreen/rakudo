@@ -39,10 +39,7 @@ my class Str does Stringy { # declared in BOOTSTRAP
     # class Str is Cool {
     #     has str $!value is box_target;
 
-    method WHY(Str:D:) {
-        nextsame if self ne "Life, the Universe, and Everything";
-        42;
-    }
+    multi method WHY('Life, the Universe, and Everything':) { 42 }
 
     multi method WHICH(Str:D:) {
         nqp::box_s(
@@ -53,7 +50,7 @@ my class Str does Stringy { # declared in BOOTSTRAP
             ObjAt
         );
     }
-    submethod BUILD(:$value as Str = '') {
+    submethod BUILD(Str() :$value = '') {
         nqp::bindattr_s(self, Str, '$!value', nqp::unbox_s($value))
     }
 
@@ -1149,12 +1146,12 @@ my class Str does Stringy { # declared in BOOTSTRAP
     }
     proto method indent($) {*}
     # Zero indent does nothing
-    multi method indent($steps as Int where { $_ == 0 }) {
+    multi method indent(Int(Any) $steps where { $_ == 0 }) {
         self;
     }
 
     # Positive indent does indent
-    multi method indent($steps as Int where { $_ > 0 }) {
+    multi method indent(Int(Any) $steps where { $_ > 0 }) {
     # We want to keep trailing \n so we have to .comb explicitly instead of .lines
         return self.comb(/:r ^^ \N* \n?/).map({
             given $_.Str {
@@ -1181,7 +1178,7 @@ my class Str does Stringy { # declared in BOOTSTRAP
     }
 
     # Negative indent (outdent)
-    multi method indent($steps as Int where { $_ < 0 }) {
+    multi method indent(Int(Any) $steps where { $_ < 0 }) {
         return outdent(self, $steps);
     }
 
