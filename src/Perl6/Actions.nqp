@@ -1826,7 +1826,7 @@ class Perl6::Actions is HLL::Actions does STDActions {
             try {
                 my $type := $*W.find_lexical_container_type($past.name);
                 $past.returns($type);
-                if nqp::objprimspec($type) {
+                if nqp::objprimspec($type) && !$*W.is_lexical_marked_ro($past.name) {
                     $past.scope('lexicalref');
                 }
             }
@@ -4030,6 +4030,9 @@ class Perl6::Actions is HLL::Actions does STDActions {
                             $_.scope('lexicalref');
                         }
                     }
+                }
+                else {
+                    $lexpad.symbol($varname, :ro(1));
                 }
             }
 
